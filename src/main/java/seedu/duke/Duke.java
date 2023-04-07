@@ -12,6 +12,7 @@ import command.CommandFind;
 import common.WelcomeMessage;
 import command.overview.CommandOverview;
 
+import data.Account;
 import data.ExpenseList;
 import data.Currency;
 
@@ -28,18 +29,19 @@ import static common.MessageList.SAVING_QUESTION_MESSAGE;
 import static data.ExpenseList.showToUser;
 import static parser.ParserAccount.caseLogOut;
 import static parser.ParserAccount.initialize;
+import static parser.ParserAccount.caseExit;
 
 
 public class Duke {
-
     protected static Storage storage;
     protected Parser parser;
     protected ExpenseList expenseList;
     protected Currency currency;
+    protected Account currentUser;
 
 
     //TODO: arbitrary filePath
-    protected String filePath = "test.json";
+    //protected String filePath = "test.json";
 
     /**
      * Initialize Duke and instantiate parser and account objects.
@@ -66,7 +68,7 @@ public class Duke {
             input = in.nextLine();
             if (input.equals("exit")) {
                 showToUser(MESSAGE_DIVIDER, SAVING_EXIT_MESSAGE, MESSAGE_DIVIDER);
-                String res = caseLogOut();
+                String res = caseExit();
                 if (res.equals("yes") || res.equals("no")) {
                     break;
                 }
