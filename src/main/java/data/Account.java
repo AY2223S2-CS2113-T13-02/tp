@@ -28,16 +28,6 @@ public class Account {
         accountNumber++;
         this.account = new ExpenseList();
         storage = new Storage(account);
-
-        // Read the expense list from the file with the file path of accountName + ".txt" if it exists
-        try (BufferedReader br = new BufferedReader(new FileReader(
-                "./src/main/java/storage/" + accountName + ".txt"))) {
-            account = new ExpenseList(br);
-        } catch (FileNotFoundException e) {
-            // The file does not exist, which means there is no saved expense list
-        } catch (IOException e) {
-            System.out.println("Error: Failed to read expense list from file.");
-        }
     }
 
     public String getAccountName() {
@@ -56,7 +46,9 @@ public class Account {
         this.passwordHash = hashPassword(password);
     }
 
-    public ExpenseList getExpenseList() { return account; }
+    public ExpenseList getExpenseList() {
+        return account;
+    }
 
     public void signup() {
         // Check if username contains special characters
@@ -94,7 +86,7 @@ public class Account {
 
     public String login() {
         boolean found = false;
-            // Check if username and password match the ones stored in the "username.txt" file
+        // Check if username and password match the ones stored in the "userList.txt" file
         try {
             File userListFile = new File("./src/main/java/storage/userList.txt");
             if (!userListFile.exists()) {
